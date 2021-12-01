@@ -45,7 +45,7 @@ rule rename:
                                          "01-seqtk_fasta_files",
                                          "{original_file}.fasta")
 	output:
-		renamed_file = lambda variable: get_revised_name(lambda.original_file)
+		renamed_file = lambda variable: get_revised_name(variable.original_file)
 	shell:
 		"""
 		mv {input.fasta_file} {output.renamed_file}

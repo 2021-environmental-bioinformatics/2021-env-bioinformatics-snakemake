@@ -29,8 +29,17 @@ Now, to get `Snakemake` working on generating our `conda` environments for us. F
 
 ```
 cd workflows/rename-fasta-snakemake/
-snakemake --use-conda --conda-create-envs-only --conda-frontend mamba
+snakemake --use-conda --conda-create-envs-only --conda-frontend mamba --cores 1
 ```
 
 And this should get `Snakemake` going! The one sticking point is the `--conda-frontend` flag, which is a more recent addition to `Snakemake` (so mileage may vary based on your version). If in a bind, just remove that flag.
 
+## Checking out Snakemake's train of thought
+
+We mentioned on Tuesday and will discuss again that `Snakemake` uses something called a **Directed Acyclic Graph** or DAG to figure out how everything you've asked it to do should actually get done. It turns out that it's really easy to get `Snakemake` to send this information straight back to you.
+
+```
+snakemake --forceall --dag |dot -Tpdf > dag.pdf
+```
+
+Is a quick command that will generate a DAG of your proposed workflow and port it to the PDF called `dag.pdf`.
