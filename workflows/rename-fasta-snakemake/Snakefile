@@ -6,15 +6,19 @@ import pandas as pd
 ## READ IN FILE THAT CONTAINS NAMES THAT WE WISH TO USE ##
 name_table = pd.read_csv(config["name_table"], sep = ",")
 name_dict = dict(zip(name_table.old_names, name_table.new_names))
+reverse_name_dict = dict(zip(name_table.new_names, name_table.old_names))
 
 def get_revised_name(original_file_name):
 	return os.path.join(config["output_dir"], "02-renamed_files",
 			name_dict[original_file_name] + ".fasta")
 
+def get_initial_name(new_file_name):
+    return reverse_name_dict[new_file_name]
+
 rule all:
 	input:
 		converted_files = expand(os.path.join(config["output_dir"],
-					"02-seqtk_fasta_files",
+					"01-seqtk_fasta_files",
 					"{original_file}.fasta"),
 					original_file = name_table.old_names),
 		renamed_files = expand(os.path.join(config["output_dir"], 
@@ -41,11 +45,13 @@ rule seqtk:
 ## Rule manages renaming fasta files based on tab-separated file ##
 rule rename:
 	input:
-		fasta_file = os.path.join(config["output_dir"],
+		fasta_file = lambda variable: os.path.join(config["output_dir"],
                                          "01-seqtk_fasta_files",
-                                         "{original_file}.fasta")
+                                         get_initial_name(variable.new_fasta) + ".fasta")
 	output:
-		renamed_file = lambda variable: get_revised_name(variable.original_file)
+		renamed_file = os.path.join(config["output_dir"],
+                                    "02-renamed_files",
+                                    "{new_fasta}.fasta")
 	shell:
 		"""
 		mv {input.fasta_file} {output.renamed_file}
