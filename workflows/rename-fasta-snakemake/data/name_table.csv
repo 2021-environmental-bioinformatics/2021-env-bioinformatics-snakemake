@@ -1,0 +1,6 @@
+old_names,new_names
+sample_1_old_formatted_name.fastq,sample_1_new_formatted_name.fastq
+sample_2_old_formatted_name.fastq,sample_2_new_formatted_name.fastq
+sample_3_old_formatted_name.fastq,sample_3_new_formatted_name.fastq
+sample_4_old_formatted_name.fastq,sample_4_new_formatted_name.fastq
+sample_5_old_formatted_name.fastq,sample_5_new_formatted_name.fastq

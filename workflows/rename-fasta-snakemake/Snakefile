@@ -4,7 +4,7 @@ import sys
 import pandas as pd
 
 ## READ IN FILE THAT CONTAINS NAMES THAT WE WISH TO USE ##
-name_table = pd.read_csv(config["name_table"], sep = "\t")
+name_table = pd.read_csv(config["name_table"], sep = ",")
 name_dict = dict(zip(name_table.old_names, name_table.new_names))
 
 def get_revised_name(original_file_name):
