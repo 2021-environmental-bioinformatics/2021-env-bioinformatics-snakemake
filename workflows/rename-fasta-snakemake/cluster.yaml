@@ -1,4 +1,3 @@
-cluster.yaml
 __default__:
     account: akrinos
     cpupertask: 5
