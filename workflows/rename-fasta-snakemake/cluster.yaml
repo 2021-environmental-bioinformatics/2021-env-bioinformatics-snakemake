@@ -1,0 +1,10 @@
+cluster.yaml
+__default__:
+    account: akrinos
+    cpupertask: 5
+    mem: 50
+    nodes: 1 
+    queue: scavenger 
+    system: slurm
+    tasks: 1
+    time: 500
