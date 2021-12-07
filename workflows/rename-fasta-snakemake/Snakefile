@@ -39,7 +39,7 @@ rule seqtk:
 		os.path.join("envs", "01-seqtk_env.yaml")
 	shell:
 		"""
-		seqtk seq -a {input.original_fastq} {output.new_fasta}
+		seqtk seq -a {input.original_fastq} > {output.new_fasta}
 		"""
 				
 ## Rule manages renaming fasta files based on tab-separated file ##
